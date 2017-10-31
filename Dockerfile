@@ -4,7 +4,7 @@ ARG TARGET=prod
 
 ENV PYTHONUNBUFFERED=1 \
     PIP_REQUIRE_VIRTUALENV=false \
-    WHEELS_PLATFORM=aldryn-baseproject-py36 \
+    WHEELS_PLATFORM=aldryn-baseproject-v4-py36 \
     PIPSI_HOME=/root/.pipsi/venvs \
     PIPSI_BIN_DIR=/root/.pipsi/bin \
     PATH=/virtualenv/bin:/root/.pipsi/bin:$PATH \
