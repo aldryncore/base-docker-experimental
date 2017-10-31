@@ -6,3 +6,6 @@ libjpeg62-turbo-dev
 libxslt-dev
 libyaml-dev
 libssl-dev
+
+# psycopg2 needs this (for the pg_config command)
+libpq-dev
