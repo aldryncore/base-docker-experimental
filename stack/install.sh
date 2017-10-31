@@ -63,7 +63,7 @@ python ${BASEDIR}/get-pipsi.py
 #    default if pipsi was installed with python3). If pip-tools were installed
 #    in python2 while using it in python3, some wheel packages would not be
 #    recognized on pypi and our wheels proxy.
-# pipsi install https://github.com/aldryncore/pip-tools/archive/1.9.0.1.tar.gz#egg=pip-tools==1.9.0.1
+pipsi install https://github.com/aldryncore/pip-tools/archive/1.9.0.1.tar.gz#egg=pip-tools==1.9.0.1
 
 # pip-reqs: requirements evaluator and client for the wheels proxy remote
 # requirements compilation/resolution API

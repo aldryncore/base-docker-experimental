@@ -19,6 +19,11 @@ RUN DEBIAN_FRONTEND=noninteractive /stack/base/install.sh
 
 RUN virtualenv --no-site-packages /virtualenv
 
+RUN mkdir -p /app && mkdir -p /data
+WORKDIR /app
+VOLUME /data
+EXPOSE 80/tcp 443/tcp
+
 ENTRYPOINT ["/tini", "-g", "--"]
 
 ADD Procfile /app/Procfile
