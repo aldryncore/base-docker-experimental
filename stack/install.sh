@@ -21,7 +21,6 @@ mkdir -p /usr/share/man/man7/
 
 # Update package listings
 apt-get update
-apt-get install -y wget curl
 
 #
 # SYSTEM PACKAGES
@@ -29,7 +28,10 @@ apt-get install -y wget curl
 # Install packages
 # xargs apt-get install -y --no-install-recommends < ${BASEDIR}/packages.txt
 # The sed command removes comments and empty lines from the packages file.
-cat ${BASEDIR}/packages.min.txt | sed '/^#/ d' | sed '/^$/d' | xargs apt-get install -y --no-install-recommends
+cat ${BASEDIR}/packages.prod.txt | sed '/^#/ d' | sed '/^$/d' | xargs apt-get install -y --no-install-recommends
+
+# If we're building the dev image install the dev packages
+if [ "$TARGET" = "dev" ] ; then cat ${BASEDIR}/packages.dev.txt | sed '/^#/ d' | sed '/^$/d' | xargs apt-get install -y --no-install-recommends ; fi
 
 
 if [ $PYTHON_MAJOR_VERSION -eq 3 ]
@@ -93,3 +95,10 @@ cp ${BASEDIR}/run-forest-run /usr/local/bin/run-forest-run
 # default virtualenv
 # NOTE: PATH=/virtualenv/bin:$PATH must be set in the Dockerfile
 virtualenv --no-site-packages /virtualenv
+
+# Install nvm
+${BASEDIR}/nvm.sh
+
+# Add all directories in /app/addons-dev to the PYTHONPATH
+cp ${BASEDIR}/add_addons_dev_to_syspath.py ${PYTHON_SITE_PACKAGES_ROOT}/add_addons_dev_to_syspath.py
+cp ${BASEDIR}/add_addons_dev_to_syspath.pth ${PYTHON_SITE_PACKAGES_ROOT}/add_addons_dev_to_syspath.pth

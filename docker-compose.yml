@@ -1,17 +1,19 @@
 version: "2"
 services:
-  py3:
+  prod:
     build:
       context: .
-      dockerfile: Dockerfile.py3
+      dockerfile: Dockerfile
     image: aldryn/base-experimental:py3-latest-slim-stretch
     volumes:
       - "./stack:/stack"
 
-  py2:
+  dev:
     build:
       context: .
       dockerfile: Dockerfile
-    image: aldryn/base-experimental:py2-latest-slim-stretch
+      args:
+        TARGET: dev
+    image: aldryn/base-experimental:py3-latest-slim-stretch-dev
     volumes:
       - "./stack:/stack"
