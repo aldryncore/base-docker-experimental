@@ -2,10 +2,18 @@
 gcc
 build-essential
 libffi-dev
+
+# Pillow
 libjpeg62-turbo-dev
+zlib1g-dev
+
+# lxml
 libxslt-dev
-libyaml-dev
+
+# uwsgi
 libssl-dev
 
 # psycopg2 needs this (for the pg_config command)
 libpq-dev
+
+libyaml-dev
