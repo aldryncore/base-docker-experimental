@@ -1,2 +1,3 @@
 #!/bin/sh
+python -c 'print("WE HAVE PYTHON!")'
 make docker_hub_build
