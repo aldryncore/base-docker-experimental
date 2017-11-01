@@ -26,6 +26,8 @@ FROM scratch
 COPY --from=build / /
 
 # Execution environment setup
+# TODO: Remove NGINX_CONF_PATH once aldryn-django has been fixed to work
+#       without it set.
 ENV PYTHONUNBUFFERED=1 \
     PIP_REQUIRE_VIRTUALENV=false \
     WHEELS_PLATFORM=aldryn-baseproject-v4-py36 \
@@ -36,7 +38,8 @@ ENV PYTHONUNBUFFERED=1 \
     LC_ALL=C.UTF-8 \
     LANG=C.UTF-8 \
     NVM_DIR=/opt/nvm \
-    NVM_VERSION=0.33.5
+    NVM_VERSION=0.33.5 \
+    NGINX_CONF_PATH=""
 WORKDIR /app
 VOLUME /data
 EXPOSE 80/tcp 443/tcp
