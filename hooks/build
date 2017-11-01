@@ -1,4 +1,2 @@
 #!/bin/sh
-python -c 'print("WE HAVE PYTHON!")'
-python --version
 make docker_hub_build
