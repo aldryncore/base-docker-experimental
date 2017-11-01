@@ -1,4 +1,4 @@
-FROM python:3.6.3-slim-stretch
+FROM python:3.6.3-slim-stretch AS build
 
 ARG TARGET=prod
 
@@ -20,6 +20,23 @@ RUN DEBIAN_FRONTEND=noninteractive /stack/base/install.sh
 RUN virtualenv --no-site-packages /virtualenv
 
 RUN mkdir -p /app && mkdir -p /data
+
+
+FROM scratch
+COPY --from=build / /
+
+# Execution environment setup
+ENV PYTHONUNBUFFERED=1 \
+    PIP_REQUIRE_VIRTUALENV=false \
+    WHEELS_PLATFORM=aldryn-baseproject-v4-py36 \
+    PIPSI_HOME=/root/.pipsi/venvs \
+    PIPSI_BIN_DIR=/root/.pipsi/bin \
+    PATH=/virtualenv/bin:/root/.pipsi/bin:$PATH \
+    PROCFILE_PATH=/app/Procfile \
+    LC_ALL=C.UTF-8 \
+    LANG=C.UTF-8 \
+    NVM_DIR=/opt/nvm \
+    NVM_VERSION=0.33.5
 WORKDIR /app
 VOLUME /data
 EXPOSE 80/tcp 443/tcp
